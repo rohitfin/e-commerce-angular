@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+  formData: any = { username:'', password: '' };
+
+  constructor(){}
+
+  ngOnInit(): void {
+    
+  }
+
+
+
+
 }
