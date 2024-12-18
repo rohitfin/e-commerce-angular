@@ -1,1 +1,172 @@
-<p>register works!</p>
+
+<div class="container py-1">
+  <form [formGroup]="formData" (ngSubmit)="onSubmit()">
+      <div class="row">
+          <div class="col-xl-4">
+              <div class="card mb-4 mb-xl-0">
+                  <div class="card-header">Profile Picture</div>
+                  <div class="card-body text-center">
+                      <img class="img-account-profile rounded-circle mb-2" [src]="filePreview ? filePreview : 'https://sb-admin-pro.startbootstrap.com/assets/img/illustrations/profiles/profile-1.png' " alt="" [ngStyle]="{'height': '150px'}">
+                      <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 2 MB</div>
+
+                      <label for="file-input" class="upload-btn">Upload File</label>
+                      <input type="file" id="file-input" accept=".JPG, .jpeg, .png" formControlName="profile" (change)="uploadFile($event)">
+
+                  </div>
+                  <div class="row p-4">
+                      <!-- <div class="col-md-12 mb-2">
+                          <label class="small mb-1" for="userName">Username (how your name will appear to other users on the site)<sup class="text-danger">*</sup></label>
+                          <input class="form-control" id="userName" type="text" formControlName="userName" [ngClass]="{ 'is-invalid': isSubmitted && formData.controls['userName'].invalid}" >
+                          <div class="invalid-feedback">  Please Enter User Name </div>
+                      </div> -->
+                      <div class="col-md-12 mb-2">
+                          <label class="small mb-1" for="fullName">Full Name<sup class="text-danger">*</sup></label>
+                          <input class="form-control" id="fullName" type="text" formControlName="fullName" [ngClass]="{ 'is-invalid': isSubmitted && formData.controls['fullName'].errors}" >
+                          <div class="invalid-feedback">  Please Enter Full Name </div>
+                      </div>
+                      <div class="col-md-12 mb-2">
+                          <label class="small mb-1" for="emailId">Email address<sup class="text-danger">*</sup></label>
+                          <input class="form-control" id="emailId" type="email" formControlName="emailId" [ngClass]="{ 'is-invalid': isSubmitted && formData.controls['emailId'].invalid}" >
+                          <div class="invalid-feedback">  Please Enter Proper Email Address </div>
+                      </div>
+                      <div class="col-md-12 mb-2">
+                          <label class="small mb-1" for="mobile">Phone number<sup class="text-danger">*</sup></label>
+                          <input class="form-control" id="mobile" type="tel" formControlName="mobile" [ngClass]="{ 'is-invalid': isSubmitted && formData.controls['mobile'].invalid}" >
+                          <div class="invalid-feedback">  Please Enter Valid Mobile Number </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-xl-8">
+              <div class="card mb-4">
+                  <div class="card-header">Personal Details</div>
+                  <div class="card-body">
+                          <div class="row gx-3">
+                              <div class="col-md-3 mb-2">
+                                  <label class="small mb-1" for="country">Country</label>
+                                  <select class="form-select" id="country" formControlName="country">
+                                      <option [value]="null">Select</option>
+                                      <option value="India">India</option>
+                                      <option value="Japan">Japan</option>
+                                      <option value="South Koria">South Koria</option>
+                                      <option value="switzerland">switzerland</option>
+                                  </select>
+                              </div>
+                              <div class="col-md-3 mb-2">
+                                  <label class="small mb-1" for="state">State</label>
+                                  <select class="form-select" id="state" formControlName="state">
+                                      <option [value]="null">Select</option>
+                                      <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                      <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                      <option value="Bihar">Bihar</option>
+                                      <option value="Haryana">Haryana</option>
+                                      <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                      <option value="Jharkhand">Jharkhand</option>
+                                      <option value="Assam">Assam</option>
+                                      <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                      <option value="Maharashtra">Maharashtra</option>
+                                      <option value="Nagaland">Nagaland</option>
+                                      <option value="Odisha">Odisha</option>
+                                      <option value="Punjab">Punjab</option>
+                                      <option value="Telangana">Telangana</option>
+                                      <option value="Tripura	Uttarakhand">Tripura	Uttarakhand</option>
+                                  </select>
+                              </div>
+                              <div class="col-md-3 mb-2">
+                                  <label class="small mb-1" for="district">District</label>
+                                  <select class="form-select" id="district" formControlName="district">
+                                      <option [value]="null">Select</option>
+                                      <option value="Mumbai City district">Mumbai City district</option>
+                                      <option value="Mumbai Suburban district">Mumbai Suburban district</option>
+                                      <option value="Thane">Thane</option>
+                                      <option value="Palghar">Palghar</option>
+                                      <option value="Raigad">Raigad</option>
+                                      <option value="Ratnagiri">Ratnagiri</option>
+                                      <option value="Sindhudurg">Sindhudurg</option>
+                                  </select>
+                              </div>
+                              <div class="col-md-3 mb-2">
+                                  <label class="small mb-1" for="pinCode">Pin Code</label>
+                                  <input class="form-control" id="pinCode" type="text" formControlName="pinCode">
+                              </div>
+                              <div class="col-md-12 mb-2">
+                                  <label class="small mb-1" for="address">Address</label>
+                                  <textarea class="form-control" id="address" formControlName="address"></textarea>
+                              </div>
+                          </div>
+                          <div class="row gx-3">
+                              <div class="col-md-6 mb-2">
+                                  <label class="small mb-1" for="skills">Skills</label>
+                                  <input class="form-control" id="skills" type="text" formControlName="skills">
+                              </div>
+                              <div class="col-md-6 mb-2">
+                                  <label class="small mb-1" for="currentOrgName">Current Organization name</label>
+                                  <input class="form-control" id="currentOrgName" type="text" formControlName="currentOrgName">
+                              </div>
+                              <div class="col-md-6 mb-2">
+                                  <label class="form-check-label">Current working in current Organization</label>
+                                  <div class="d-flex gap-3">
+                                      <div class="form-check">
+                                          <input class="form-check-input" id="yes" type="radio" name="currentlyWorking" value="1" checked="" formControlName="currentlyWorking" (change)="onChanageCurrectlyWorking($event)" checked>
+                                          <label class="form-check-label" for="yes">Yes</label>
+                                      </div>
+                                      <div class="form-check">
+                                          <input class="form-check-input" id="no" type="radio" name="currentlyWorking" value="0" formControlName="currentlyWorking" (change)="onChanageCurrectlyWorking($event)">
+                                          <label class="form-check-label" for="no">No</label>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-3 mb-2">
+                                  <label class="small mb-1" for="joiningDate">Joining Date</label>
+                                  <input class="form-control" id="joiningDate" type="date" formControlName="joiningDate">
+                              </div>
+                              <div class="col-md-3 mb-2" [ngClass]="{'d-none': isCurrentlyWorking}">
+                                  <label class="small mb-1" for="joiningEndDate">End Date</label>
+                                  <input class="form-control" id="joiningEndDate" type="date" formControlName="joiningEndDate">
+                              </div>
+                          </div>
+
+                          <div class="row gx-3 mt-3" formArrayName="experiences">
+                              <h5>Experience</h5>
+                                  <div class="border rounded p-2 mb-4 position-relative" *ngFor="let item of fieldArray.controls; let i = index"  [formGroupName]="i">
+                                    <div class="btn btn-danger btn-sm rounded-circle close-btn" *ngIf="i > 0" (click)="removeField(i)"><i class="bi bi-x-lg"></i></div>
+                                      <div class="row">
+                                          <div class="col-md-12 mb-2">
+                                              <label class="small mb-1" for="orgName">Organization name</label>
+                                              <input class="form-control" id="orgName" type="text" formControlName="orgName">
+                                          </div>
+                                          <div class="col-md-4 mb-2">
+                                              <label class="small mb-1" for="experience">Experience</label>
+                                              <select class="form-select" id="experience" formControlName="experience">
+                                                  <option value="">Select</option>
+                                                  <option value="0-1">0 - 1</option>
+                                                  <option value="1-2">1-2</option>
+                                                  <option value="2-3">2-3</option>
+                                                  <option value="3-4">3-4</option>
+                                                  <option value="4-5">4-5</option>
+                                                  <option value="5+">5+</option>
+                                              </select>
+                                          </div>
+                                          <div class="col-md-4 mb-2">
+                                              <label for="formDate">From Date</label>
+                                              <input type="date" class="form-control" id="formDate" formControlName="formDate">
+                                          </div>
+                                          <div class="col-md-4 mb-2">
+                                              <label for="formDate">To Date</label>
+                                              <input type="date" class="form-control" id="toDate" formControlName="toDate">
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="text-end mt-2">
+                                      <button type="button" class="btn btn-warning btn-sm" (click)="addField()">Add Experience</button>
+                                  </div>
+                          </div>
+                          <button type="submit" class="btn btn-primary mt-3" [disabled]="isSubmitting"> 
+                            Submit <div class="spinner-border fs-5" role="status" *ngIf="isSubmitting"></div> 
+                          </button>
+                      </div>
+                  </div>
+          </div>
+      </div>
+  </form>
+</div>
